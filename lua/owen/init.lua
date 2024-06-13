@@ -1,0 +1,6 @@
+require("owen.remap")
+require("owen.after.plugin.telescope")
+require("owen.after.plugin.colors")
+require("owen.after.plugin.lsp")
+require("owen.after.plugin.treesitter")
+require("owen.set")
