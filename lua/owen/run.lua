@@ -55,3 +55,4 @@ vim.api.nvim_create_user_command("RunF", function ()
     end
 
 end, {})
+
