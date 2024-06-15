@@ -33,5 +33,9 @@ return require('packer').startup(function(use)
 		}
 	}
 
+    use {
+        'mattn/emmet-vim'
+    }
+
 	use {'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'}}
 end)

@@ -68,8 +68,8 @@ require('mason-lspconfig').setup({
 local cmp = require("cmp")
 cmp.setup({
     mapping = {
-        ['<Enter>'] = cmp.mapping.confirm({select = false}),
-        ['<Esc>'] = cmp.mapping.abort(),
+        ['<Tab>'] = cmp.mapping.confirm({select = false}),
+        ['<S-Tab>'] = cmp.mapping.abort(),
         ['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
         ['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
     }
