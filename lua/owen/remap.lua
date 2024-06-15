@@ -20,3 +20,5 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)     -- Format text
 vim.keymap.set("v", "U", "U<leader>gv")                  -- Change to uppercase
 vim.keymap.set("v", "u", "u<leader>gv")                  -- Change to lowercase
 
+vim.keymap.set("n", "<leader>z0", "<leader>zM")          -- Fold all
+vim.keymap.set("n", "<leader>zj", "<leader>zRM")         -- Unfold all
