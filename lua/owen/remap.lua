@@ -1,7 +1,6 @@
 vim.g.mapleader = " "                                    -- Set leader
 
 vim.keymap.set("n", "<leader>ex", vim.cmd.Ex)            -- Go to explorer
-vim.keymap.set("n", "<leader>wex", ":w | :Ex | <Enter>") -- Go to explorer
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")             -- Move line up
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")             -- Move line down
@@ -20,5 +19,7 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)     -- Format text
 vim.keymap.set("v", "U", "U<leader>gv")                  -- Change to uppercase
 vim.keymap.set("v", "u", "u<leader>gv")                  -- Change to lowercase
 
-vim.keymap.set("n", "<leader>z0", "<leader>zM")          -- Fold all
-vim.keymap.set("n", "<leader>zj", "<leader>zRM")         -- Unfold all
+vim.keymap.set("n", "<leader>wd", vim.diagnostic.disable)-- disable diagnostic
+vim.keymap.set("n", "<leader>we", vim.diagnostic.enable) -- enable diagnostic
+
+vim.opt.mouse = "" -- Disable mouse controls

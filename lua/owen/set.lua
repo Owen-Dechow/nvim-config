@@ -31,6 +31,6 @@ vim.opt.colorcolumn = "90"
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 
-vim.opt.foldmethod = "indent"
-
 vim.g.user_emmet_leader_key = '<C-e>'
+
+vim.diagnostic.enable()
