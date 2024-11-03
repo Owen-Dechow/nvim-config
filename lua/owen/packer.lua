@@ -18,35 +18,33 @@ return require('packer').startup(function(use)
         as = "rose-pine"
     }
 
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
-        requires = {
-            --- Uncomment the two plugins below if you want to manage the language servers from neovim
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
+    use({ 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' })
+    use({ 'neovim/nvim-lspconfig' })
+    use({ 'hrsh7th/nvim-cmp' })
+    use({ 'hrsh7th/cmp-nvim-lsp' })
 
-            { 'neovim/nvim-lspconfig' },
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'L3MON4D3/LuaSnip' },
-        }
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
     }
+
+    use({
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!:).
+        run = "make install_jsregexp"
+    })
 
     use {
         'mattn/emmet-vim'
     }
 
     use { 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } }
+    use { 'nvim-treesitter/playground' }
 
-    use(
-        {
-            "iamcco/markdown-preview.nvim",
-            run = "cd app && npm install",
-            setup = function()
-                vim.g.mkdp_filetypes = { "markdown" }
-            end,
-            ft = { "markdown" },
-        }
-    )
+    use { 'mbbill/undotree' }
+
+    use { 'tpope/vim-fugitive' }
 end)
