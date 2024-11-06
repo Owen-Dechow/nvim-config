@@ -25,3 +25,5 @@ vim.keymap.set("n", "<leader>wd", vim.diagnostic.disable) -- disable diagnostic
 vim.keymap.set("n", "<leader>we", vim.diagnostic.enable)  -- enable diagnostic
 
 vim.opt.mouse = ""                                        -- Disable mouse controls
+
+vim.keymap.set({"n", "v"}, "<leader>d", '"_d')
