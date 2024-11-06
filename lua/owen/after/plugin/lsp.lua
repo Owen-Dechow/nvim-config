@@ -47,10 +47,10 @@ cmp.setup({
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ['<Enter>'] = cmp.mapping.confirm({ select = true })
+        ['<Enter>'] = cmp.mapping.confirm({ select = false }),
+        ['<Tab>'] = cmp.mapping.confirm({ select = true })
     }),
 })
-
 
 
 require('mason').setup({})
