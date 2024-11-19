@@ -47,4 +47,9 @@ return require('packer').startup(function(use)
     use { 'mbbill/undotree' }
 
     use { 'tpope/vim-fugitive' }
+
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
 end)
