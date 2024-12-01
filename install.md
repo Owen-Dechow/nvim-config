@@ -20,3 +20,6 @@ Live grep will not work unless installed.
 ```
 cargo install ripgrep
 ```
+
+6. Install cSpell
+In Neovim run `:CocInstall coc-spell-checker`

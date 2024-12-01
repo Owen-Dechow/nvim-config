@@ -28,9 +28,6 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "90"
 
-vim.opt.spelllang = "en_us"
-vim.opt.spell = true
-
 vim.g.user_emmet_leader_key = '<C-e>'
 
 vim.diagnostic.enable()
