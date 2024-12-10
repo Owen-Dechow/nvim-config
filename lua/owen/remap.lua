@@ -17,10 +17,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")                     -- Exit C-c same as es
 vim.keymap.set("v", "U", "U<leader>gv")                   -- Change to uppercase
 vim.keymap.set("v", "u", "u<leader>gv")                   -- Change to lowercase
 
-vim.keymap.set("n", "<leader>wd", vim.diagnostic.disable) -- disable diagnostic
-vim.keymap.set("n", "<leader>we", vim.diagnostic.enable)  -- enable diagnostic
-vim.keymap.set({ "n", "v" }, "<leader>ws", vim.diagnostic.open_float)
-vim.keymap.set({ "n", "v" }, "<leader>wn", vim.diagnostic.goto_next)
 
 vim.opt.mouse = "" -- Disable mouse controls
 
@@ -31,6 +27,9 @@ vim.keymap.set('n', '<leader>gd', '<Plug>(coc-definition)', {})
 vim.keymap.set('n', '<leader>gr', '<Plug>(coc-references)', {})
 vim.keymap.set('n', '<leader>rr', '<Plug>(coc-rename)', {})
 vim.keymap.set('n', '<leader>fb', ':CocCommand editor.action.formatDocument<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>wd", ":CocDisable<CR>") -- disable diagnostic
+vim.keymap.set("n", "<leader>we", ":CocEnable<CR>")  -- enable diagnostic
+vim.keymap.set({ "n", "v" }, "<leader>wn", "<Plug>(coc-diagnostic-next)")
 
 -- Function to handle Tab in insert and select mode for coc.nvim
 vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "\\<C-y>" : "\\<Tab>"',

@@ -1,17 +1,19 @@
 {
     "cSpell.enabled": true,
     "cSpell.language": "en",
+    "cSpell.allowCompoundWords": true,
     "cSpell.userWords": [
       "autocmd",
       "camelCase",
+      "funcs",
+      "gmail",
       "lspconfig",
       "luasnip",
       "noremap",
-      "nvim"
+      "nvim",
+      "pyright",
+      "structs"
     ],
-    "cSpell.checkFileExtensions": ["*.js", "*.ts", "*.jsx", "*.tsx", "*.html", "*.css", "*.scss", "*.py", "*.md"],
-    "cSpell.allowCompoundWords": true,
-    "cSpell.caseSensitive": true,
     "cSpell.enabledLanguageIds": [
       "asciidoc",
       "c",
@@ -48,6 +50,17 @@
       "vim",
       "yaml",
       "yml"
-    ]
+    ],
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportGeneralTypeIssues": false,
+        "reportAttributeAccessIssue": false,
+        "reportArgumentType": false,
+        "reportOperatorIssue": false,
+        "reportIndexIssue": false
+    },
+    "inlayHint.enable": false,
+    "emmet.includeLanguages": {
+        "htmldjango": "html",
+        "django": "html"
+    }
 }
-

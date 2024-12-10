@@ -1,15 +1,15 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function(use)
+return require("packer").startup(function(use)
     -- Packer self manager
-    use 'wbthomason/packer.nvim'
+    use "wbthomason/packer.nvim"
 
     -- Telescope fuzzy find
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.6',
+        "nvim-telescope/telescope.nvim", tag = "0.1.6",
         requires = {
-            'nvim-lua/plenary.nvim'
+            "nvim-lua/plenary.nvim"
         }
     }
 
@@ -21,18 +21,18 @@ return require('packer').startup(function(use)
 
     -- Emmet
     use {
-        'mattn/emmet-vim'
+        "mattn/emmet-vim"
     }
 
     -- Treesitter
-    use { 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } }
-    use { 'nvim-treesitter/playground' }
+    use { "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } }
+    use { "nvim-treesitter/playground" }
 
     -- Undotree
-    use { 'mbbill/undotree' }
+    use { "mbbill/undotree" }
 
     -- Fugitive
-    use { 'tpope/vim-fugitive' }
+    use { "tpope/vim-fugitive" }
 
     -- Markdown preview
     use {
@@ -49,6 +49,8 @@ return require('packer').startup(function(use)
     }
 
     -- Coc for VSCode settings
-    use { 'neoclide/coc.nvim', branch = 'release' }
+    use { "neoclide/coc.nvim", branch = "release" }
 
+    -- Bottom pad when scrolling
+    use { "Aasim-A/scrollEOF.nvim" }
 end)
