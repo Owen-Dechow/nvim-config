@@ -1,9 +1,9 @@
 return {
-    --"Owen-Dechow/nvim_wurd_spel",
-    dir = "C:\\Users\\owend\\Desktop\\nvim_wurd_spell",
+    -- dir = "C:\\Users\\owend\\Desktop\\nvim_wurd_spell",
+    "Owen-Dechow/nvim_wurd_spel",
     config = function()
         require("wurd_spel").setup({
-            severity = vim.diagnostic.severity.INFO,
+            -- severity = vim.diagnostic.severity.INFO,
             -- -- Set the severity level of spelling errors
             -- -- INFO, WARN, ERROR
 
@@ -15,8 +15,24 @@ return {
             -- -- IMPORTENT: words added to Neovim's built in
             --    spelling ignore dictionary are still ignored.`
             --    It is suggested to add words to that dictionary
-            --    using `zg` or `:spellgood` instead of adding
-            --    words here.
+            --    using `zg`, `:spellgood`, or from the WurdSpelSuggest
+            --    options instead of adding words here.
+
+            -- enabled = true
+            -- -- Enable WurdSpel on start
+
+            -- remap = true
+            -- -- Remap the builtin z=, zg, & zw commands to the
+            -- -- WurdSpel command equivalents.
+            -- -- z= -> WurdSpelSuggest
+            -- -- zg -> WurdSpelGood
+            -- -- zw -> WurdSpelBad
+
+            -- remap_special = false
+            -- -- Add special remaps
+            -- -- <leader>zz -> WurdSpelSuggest
+            -- -- <leader>zg -> WurdSpelGood
+            -- -- <leader>zw -> WurdSpelBad
         })
     end
 }

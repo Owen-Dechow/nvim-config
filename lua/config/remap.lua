@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-global
+---@diagnostic disable: undefined-global, undefined-field
 
 -- Move lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -13,7 +13,7 @@ vim.keymap.set("v", "<leader>y", '"+y')
 -- Esc same as crtl-c
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
--- Do not disselect after u/U
+-- Do not deselect after u/U
 vim.keymap.set("v", "U", "U<leader>gv")
 vim.keymap.set("v", "u", "u<leader>gv")
 
@@ -70,6 +70,16 @@ cmp.setup({
 })
 
 -- Spelling
-vim.keymap.set("n", "<leader>z",
-    function() require("telescope.builtin").spell_suggest() end
-)
+vim.keymap.set("n", "<leader>zz", "<CMD>WurdSpelSuggest<CR>")
+vim.keymap.set("n", "<leader>zw", "<CMD>WurdSpelBad<CR>")
+vim.keymap.set("n", "<leader>zg", "<CMD>WurdSpelGood<CR>")
+
+-- Toggle line wrap
+vim.keymap.set("n", "<leader>tw", function()
+    vim.wo.wrap = not vim.wo.wrap
+    if vim.wo.wrap then
+        vim.notify("Line wrap on")
+    else
+        vim.notify("Line wrap off")
+    end
+end)
