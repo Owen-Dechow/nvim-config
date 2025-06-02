@@ -23,14 +23,18 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 -- Clear search
 vim.keymap.set("n", "<leader>ch", "<CMD>noh<CR>")
 
+-- Save/Close
+vim.keymap.set("n", "<leader>bd", "<CMD>bd<CR>")
 vim.api.nvim_create_user_command("W", function() vim.cmd("w") end, {})
 vim.api.nvim_create_user_command("Wq", function() vim.cmd("wq") end, {})
 vim.api.nvim_create_user_command("Q", function() vim.cmd("q") end, {})
+
 
 -- Telescope
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set("n", "<leader>ls", telescope_builtin.buffers)
 
 -- Undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -70,9 +74,9 @@ cmp.setup({
 })
 
 -- Spelling
-vim.keymap.set("n", "<leader>zz", "<CMD>WurdSpelSuggest<CR>")
-vim.keymap.set("n", "<leader>zw", "<CMD>WurdSpelBad<CR>")
-vim.keymap.set("n", "<leader>zg", "<CMD>WurdSpelGood<CR>")
+vim.keymap.set("n", "<leader>zz", "<CMD>WurdSpel suggest<CR>")
+vim.keymap.set("n", "<leader>zw", "<CMD>WurdSpel bad<CR>")
+vim.keymap.set("n", "<leader>zg", "<CMD>WurdSpel good<CR>")
 
 -- Toggle line wrap
 vim.keymap.set("n", "<leader>tw", function()

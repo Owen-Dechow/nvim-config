@@ -5,15 +5,12 @@ concat
 autocmd
 owend
 guicursor
-babababa
 feedkeys
 termcodes
 keymap
 Neotree
 Undotree
-ipairs
 spellbad
-gmatch
 spellgood
 Treesitter
 github
@@ -36,7 +33,6 @@ undofile
 scrolloff
 fillchars
 quickfix
-cclose
 updatetime
 blinkwait
 blinkoff
@@ -45,3 +41,7 @@ undotree
 dropdown
 treesitter
 configs
+buftype
+args
+openspellfile
+stdpath

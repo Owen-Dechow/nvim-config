@@ -23,11 +23,10 @@ vim.opt.undodir = vim.env.HOME .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.scrolloff = 8
-vim.opt.fillchars = { eob = " " }
+-- vim.opt.fillchars = { eob = " " }
 vim.diagnostic.enable()
 
 vim.wo.wrap = false
-
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = "quickfix",

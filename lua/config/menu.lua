@@ -3,13 +3,25 @@
 local version = vim.version()
 version = version.major .. "." .. version.minor .. "." .. version.patch
 
+local function utf8len(str)
+    local _, count = string.gsub(str, "[^\128-\191]", "")
+    return count
+end
+
 local text = {
     "",
     "",
     "",
     "",
     "Neovim v" .. version,
-    "Owen Dechow's Neovim configuration",
+    function()
+        local path = vim.fn.getcwd()
+        if utf8len(path) > 40 then
+            return "..." .. string.sub(path, utf8len(path) - 37, utf8len(path) + 1)
+        else
+            return path
+        end
+    end,
     "",
     "╭──────────────────────────────────────────────╮",
     "│           1 Peter 3:15 (NASB 1995)           │",
@@ -27,15 +39,11 @@ local text = {
     "├────────────────┼─────────────────────────────┤",
     "│ :OpenStartMenu │ • Open this menu again      │",
     "╰────────────────┴─────────────────────────┬───┤",
-    "                                           │ ✞ │",
+    " Owen Dechow's Neovim Config               │ ✞ │",
     "                                           ╰───╯",
     "",
 }
 
-local function utf8len(str)
-    local _, count = string.gsub(str, "[^\128-\191]", "")
-    return count
-end
 
 local function render_start_screen()
     local new_text = {}
@@ -45,6 +53,10 @@ local function render_start_screen()
     local w_width = vim.api.nvim_win_get_width(0)
 
     for key, line in pairs(text) do
+        if type(line) == "function" then
+            line = line()
+        end
+
         local t_width = utf8len(line)
         if t_width < w_width then
             local add = math.floor((w_width - t_width) / 2)
