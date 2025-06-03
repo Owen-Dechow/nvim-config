@@ -3,10 +3,31 @@
 local version = vim.version()
 version = version.major .. "." .. version.minor .. "." .. version.patch
 
+local git_cmd = "git --git-dir=\"" .. vim.fs.joinpath(vim.fn.stdpath("config"), ".git") .. "\" rev-parse --short "
+
 local function utf8len(str)
     local _, count = string.gsub(str, "[^\128-\191]", "")
     return count
 end
+
+local function get_latest_commit_short_hash()
+    local handle = io.popen(git_cmd .. "HEAD")
+    if handle == nil then return nil end
+
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("%s+", "")
+end
+
+local function get_remote_latest_commit_short_hash()
+    local handle = io.popen(git_cmd .. "origin/main")
+    if handle == nil then return nil end
+
+    local short_hash = handle:read("*a")
+    handle:close()
+    return short_hash:gsub("%s+", "")
+end
+
 
 local text = {
     "",
@@ -42,6 +63,7 @@ local text = {
     " Owen Dechow's Neovim Config               │ ✞ │",
     "                                           ╰───╯",
     "",
+    "",
 }
 
 
@@ -71,6 +93,40 @@ local function render_start_screen()
     vim.api.nvim_buf_set_option(bufn, 'buftype', 'nofile')
     vim.api.nvim_buf_set_option(bufn, 'bufhidden', 'wipe')
     vim.api.nvim_win_set_cursor(0, { 1, 1 })
+
+    vim.defer_fn(function()
+        local local_ = get_latest_commit_short_hash()
+        local remote = get_remote_latest_commit_short_hash()
+
+        local text;
+        if local_ ~= nil or remote ~= nil then
+            if local_ ~= remote then
+                text = { "Local and remote configs out of sync.",
+                    "Local: " .. local_, "Remote: " .. remote }
+            else
+                text = {
+                    "Local and remote configs synced at " .. local_ .. "."
+                }
+            end
+
+            local config_text = {}
+            for key, line in pairs(text) do
+                if type(line) == "function" then
+                    line = line()
+                end
+
+                local t_width = utf8len(line)
+                if t_width < w_width then
+                    local add = math.floor((w_width - t_width) / 2)
+                    config_text[key] = string.rep(" ", add) .. line
+                end
+            end
+
+            vim.api.nvim_buf_set_option(bufn, "modifiable", true)
+            vim.api.nvim_buf_set_text(bufn, #new_text - 1, 0, #new_text - 1, 0, config_text)
+            vim.api.nvim_buf_set_option(bufn, "modifiable", false)
+        end
+    end, 0)
 end
 
 
