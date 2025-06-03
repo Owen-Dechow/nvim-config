@@ -82,10 +82,13 @@ local function render_start_screen()
         local t_width = utf8len(line)
         if t_width < w_width then
             local add = math.floor((w_width - t_width) / 2)
-            new_text[key] = string.rep(" ", add) .. line
+            if line ~= "" then
+                new_text[key] = string.rep(" ", add) .. line
+            else
+                new_text[key] = ""
+            end
         end
     end
-
 
     vim.api.nvim_buf_set_text(bufn, 0, 0, 0, 0, new_text)
     vim.api.nvim_buf_set_option(bufn, "modifiable", false)
@@ -101,11 +104,16 @@ local function render_start_screen()
         local text;
         if local_ ~= nil or remote ~= nil then
             if local_ ~= remote then
-                text = { "Local and remote configs out of sync.",
-                    "Local: " .. local_, "Remote: " .. remote }
+                text = {
+                    "Local and remote configs out of sync.",
+                    "Local: " .. local_ .. " | Remote: " .. remote, ""
+                , ""
+                }
             else
                 text = {
-                    "Local and remote configs synced at " .. local_ .. "."
+                    "Local and remote configs synced at " .. local_ .. ".",
+                    "",
+                    ""
                 }
             end
 
