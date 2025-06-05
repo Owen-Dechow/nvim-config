@@ -140,7 +140,9 @@ end
 
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
-        render_start_screen()
+        if vim.fn.argc() == 0 then
+            render_start_screen()
+        end
     end
 })
 
