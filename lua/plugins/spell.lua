@@ -1,6 +1,6 @@
 return {
-    -- dir = "C:\\Users\\owend\\Desktop\\nvim_wurd_spell",
-    "Owen-Dechow/nvim_wurd_spel",
+    dir = "C:\\Users\\owend\\Desktop\\nvim_wurd_spell",
+    -- "Owen-Dechow/nvim_wurd_spel",
     opts = {
         -- severity = vim.diagnostic.severity.INFO,
         -- -- Set the severity level of spelling errors

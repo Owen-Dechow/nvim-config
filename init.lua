@@ -2,7 +2,9 @@ require("config.lazy")
 require("config.remap")
 require("config.opts")
 require("config.menu")
+<<<<<<< HEAD
 
+-- Setup terminal sizing
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
   callback = function()
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
@@ -14,3 +16,5 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 vim.api.nvim_create_autocmd("UILeave", {
   callback = function() io.write("\027]111\027\\") end,
 })
+=======
+>>>>>>> parent of 9b663c4 (Terminal sizing)
