@@ -13,6 +13,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "03bc581e05e81d33808b42b2d7e76d70adb3b595" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
   "nvim-web-devicons": { "branch": "master", "commit": "1fb58cca9aebbc4fd32b086cb413548ce132c127" },
+  "nvim_wurd_spel": { "branch": "main", "commit": "fdb3685f6b1e3d3f7d713921fc9f14b3f904814d" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "pretty_hover": { "branch": "master", "commit": "cdb1f2107301c6ebb48c1e734362df6b1187f4f9" },
   "scroll_eof_ctrl_e": { "branch": "main", "commit": "4d005004ae4129a3b9e162cab786830286aee887" },
