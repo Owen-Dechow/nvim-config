@@ -69,8 +69,10 @@ local text = {
 
 local function render_start_screen()
     local new_text = {}
+
     local bufn = vim.api.nvim_create_buf(false, false)
     vim.api.nvim_set_current_buf(bufn)
+    vim.b.name = "StartMenu"
 
     local w_width = vim.api.nvim_win_get_width(0)
 
@@ -87,6 +89,8 @@ local function render_start_screen()
             else
                 new_text[key] = ""
             end
+        else
+            new_text[key] = line
         end
     end
 
@@ -127,6 +131,8 @@ local function render_start_screen()
                 if t_width < w_width then
                     local add = math.floor((w_width - t_width) / 2)
                     config_text[key] = string.rep(" ", add) .. line
+                else
+                    config_text[key] = line
                 end
             end
 
@@ -141,6 +147,14 @@ end
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         if vim.fn.argc() == 0 then
+            render_start_screen()
+        end
+    end
+})
+
+vim.api.nvim_create_autocmd("WinResized", {
+    callback = function()
+        if vim.b.name == "StartMenu" then
             render_start_screen()
         end
     end
