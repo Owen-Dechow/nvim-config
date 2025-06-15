@@ -29,11 +29,16 @@ vim.api.nvim_create_user_command("W", function() vim.cmd("w") end, {})
 vim.api.nvim_create_user_command("Wq", function() vim.cmd("wq") end, {})
 vim.api.nvim_create_user_command("Q", function() vim.cmd("q") end, {})
 
+-- Inline hints
+vim.api.nvim_create_user_command("ToggleInlayHints", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, {})
 
 -- Telescope
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fg', telescope_builtin.git_files, { desc = 'Telescope find git files' })
+vim.keymap.set('n', '<leader>lg', telescope_builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set("n", "<leader>ls", telescope_builtin.buffers)
 
 -- Undo tree
