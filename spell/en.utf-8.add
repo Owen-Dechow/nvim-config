@@ -82,3 +82,7 @@ hicolor
 Params
 tanktype
 deque
+pygame
+pygpart
+classmethod
+Hashable

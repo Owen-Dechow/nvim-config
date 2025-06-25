@@ -132,7 +132,7 @@ end
 vim.api.nvim_create_user_command("OpenStartMenu", render_start_screen, {})
 
 vim.defer_fn(function()
-    local status = check_git_status("C:\\Users\\owend\\AppData\\Local\\nvim")
+    local status = check_git_status(vim.fn.stdpath("config"))
     if #status == 0 then
             vim.notify("Neovim config synchronized ✓")
     else
