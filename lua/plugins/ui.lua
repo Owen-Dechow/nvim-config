@@ -18,5 +18,14 @@ return {
         event = "LspAttach",
         opts = {}
     },
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            require("notify").setup({
+                stages = "static"
+            })
+            vim.notify = require("notify")
+        end
+    }
 
 }

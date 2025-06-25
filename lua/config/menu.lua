@@ -1,33 +1,10 @@
----@diagnostic disable: undefined-global
-
 local version = vim.version()
 version = version.major .. "." .. version.minor .. "." .. version.patch
-
-local git_cmd = "git --git-dir=\"" .. vim.fs.joinpath(vim.fn.stdpath("config"), ".git") .. "\" rev-parse --short "
 
 local function utf8len(str)
     local _, count = string.gsub(str, "[^\128-\191]", "")
     return count
 end
-
-local function get_latest_commit_short_hash()
-    local handle = io.popen(git_cmd .. "HEAD")
-    if handle == nil then return nil end
-
-    local result = handle:read("*a")
-    handle:close()
-    return result:gsub("%s+", "")
-end
-
-local function get_remote_latest_commit_short_hash()
-    local handle = io.popen(git_cmd .. "origin/main")
-    if handle == nil then return nil end
-
-    local short_hash = handle:read("*a")
-    handle:close()
-    return short_hash:gsub("%s+", "")
-end
-
 
 local text = {
     "",
@@ -100,47 +77,6 @@ local function render_start_screen()
     vim.api.nvim_buf_set_option(bufn, 'buftype', 'nofile')
     vim.api.nvim_buf_set_option(bufn, 'bufhidden', 'wipe')
     vim.api.nvim_win_set_cursor(0, { 1, 1 })
-
-    vim.defer_fn(function()
-        local local_ = get_latest_commit_short_hash()
-        local remote = get_remote_latest_commit_short_hash()
-
-        local text;
-        if local_ ~= nil or remote ~= nil then
-            if local_ ~= remote then
-                text = {
-                    "Local and remote configs out of sync.",
-                    "Local: " .. local_ .. " | Remote: " .. remote, ""
-                , ""
-                }
-            else
-                text = {
-                    "Local and remote configs synced at " .. local_ .. ".",
-                    "",
-                    ""
-                }
-            end
-
-            local config_text = {}
-            for key, line in pairs(text) do
-                if type(line) == "function" then
-                    line = line()
-                end
-
-                local t_width = utf8len(line)
-                if t_width < w_width then
-                    local add = math.floor((w_width - t_width) / 2)
-                    config_text[key] = string.rep(" ", add) .. line
-                else
-                    config_text[key] = line
-                end
-            end
-
-            vim.api.nvim_buf_set_option(bufn, "modifiable", true)
-            vim.api.nvim_buf_set_text(bufn, #new_text - 1, 0, #new_text - 1, 0, config_text)
-            vim.api.nvim_buf_set_option(bufn, "modifiable", false)
-        end
-    end, 0)
 end
 
 
@@ -160,4 +96,49 @@ vim.api.nvim_create_autocmd("WinResized", {
     end
 })
 
+local function check_git_status(git_path)
+    local function run_git_command(cmd)
+        local f = io.popen(cmd)
+        local result = f:read("*a")
+        f:close()
+        return result
+    end
+
+    -- Save current directory
+    local original_dir = run_git_command("cd")
+
+    -- Change to git directory
+    os.execute('cd "' .. git_path .. '"')
+
+    local result_flags = {}
+
+    -- Check for local unsaved changes
+    local status = run_git_command('cd "' .. git_path .. '" && git status --porcelain')
+    if status ~= "" then
+        table.insert(result_flags, "local-unsaved")
+    end
+
+    -- Check for unpushed commits
+    local unpushed = run_git_command('cd "' .. git_path .. '" && git log --branches --not --remotes')
+    if unpushed ~= "" then
+        table.insert(result_flags, "unpushed")
+    end
+
+    -- Check for remote commits
+    run_git_command('cd "' .. git_path .. '" && git fetch')
+    local remote = run_git_command('cd "' .. git_path .. '" && git log --remotes --not --branches')
+    if remote ~= "" then
+        table.insert(result_flags, "remote")
+    end
+
+    -- Optional: restore original dir (though most shells are per-process)
+    return result_flags
+end
+
 vim.api.nvim_create_user_command("OpenStartMenu", render_start_screen, {})
+
+vim.defer_fn(function()
+    for _, alert in pairs(check_git_status("C:\\Users\\owend\\AppData\\Local\\nvim")) do
+        vim.notify("Neovim config is not synchronized: " .. alert, "warn")
+    end
+end, 10)
