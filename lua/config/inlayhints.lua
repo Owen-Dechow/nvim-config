@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = "*.rs",
     callback = function()
         if not toggled then
-            vim.lsp.inlay_hint.enable(true)
+            vim.defer_fn(function() vim.lsp.inlay_hint.enable(true) end, 500)
             toggled = true
             vim.notify(
                 "Rust Project Detected!"
