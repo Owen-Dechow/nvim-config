@@ -3,6 +3,7 @@ require("config.remap")
 require("config.opts")
 require("config.menu")
 require("config.sync")
+require("config.inlayhints")
 
 -- Setup terminal sizing
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
