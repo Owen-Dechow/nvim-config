@@ -6,7 +6,6 @@ return {
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown {}
-
                     }
                 }
             }
@@ -22,7 +21,8 @@ return {
         "rcarriga/nvim-notify",
         config = function()
             require("notify").setup({
-                stages = "static"
+                stages = "static",
+                top_down = false,
             })
             vim.notify = require("notify")
         end
