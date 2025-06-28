@@ -46,4 +46,17 @@ return {
     {
         "neovim/nvim-lspconfig",
     },
+    {
+        "nvimtools/none-ls.nvim",
+        opts = function()
+            local null_ls = require("null-ls")
+            return {
+                sources = {
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.findent,
+                    null_ls.builtins.formatting.cbfmt,
+                },
+            }
+        end,
+    }
 }
