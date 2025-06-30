@@ -17,17 +17,6 @@ local install = {
 return {
     {
         "mason-org/mason.nvim",
-        config = function()
-            require("mason").setup({})
-            require("mason-registry").refresh(function()
-                for _, name in ipairs(install) do
-                    local p = require("mason-registry").get_package(name)
-                    if p and not p:is_installed() then
-                        p:install()
-                    end
-                end
-            end)
-        end
     },
     {
         "mason-org/mason-lspconfig.nvim",
@@ -37,7 +26,21 @@ return {
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server)
-                        lspconfig[server].setup({ capabilities = capabilities })
+                        if server == "basedpyright" then
+                            lspconfig.basedpyright.setup({
+                                capabilities = capabilities,
+                                settings = {
+                                    python = {
+                                        analysis = {
+                                            typeCheckingMode = "off",         -- Disable type checking
+                                            diagnosticMode = "openFilesOnly", -- Limit diagnostics
+                                        }
+                                    }
+                                }
+                            })
+                        else
+                            lspconfig[server].setup({ capabilities = capabilities })
+                        end
                     end
                 }
             })

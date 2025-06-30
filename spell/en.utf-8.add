@@ -167,3 +167,7 @@ typeof
 builtins
 lspconfig
 nvimtools
+cloudformation
+apigateway
+Undeploy
+Unschedule
