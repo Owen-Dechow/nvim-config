@@ -1,43 +1,41 @@
-local function check_git_status(git_path)
-    local function run_git_command(cmd)
-        local f = io.popen(cmd)
-        if not f then return "" end
-        local result = f:read("*a")
-        f:close()
-        return result
-    end
+local git_path = vim.fn.stdpath("config")
 
-    local result_flags = {}
-
-    -- Check for local unsaved changes
-    local status = run_git_command('git -C "' .. git_path .. '" status --porcelain')
-    if status ~= "" then
-        table.insert(result_flags, "Unsaved Local Changes")
-    end
-
-    -- Check for unpushed commits
-    local unpushed = run_git_command('git -C "' .. git_path .. '" log --branches --not --remotes')
-    if unpushed ~= "" then
-        table.insert(result_flags, "Unpushed Commits")
-    end
-
-    -- Fetch remote and check for new commits
-    run_git_command('git -C "' .. git_path .. '" fetch')
-    local remote = run_git_command('git -C "' .. git_path .. '" log --remotes --not --branches')
-    if remote ~= "" then
-        table.insert(result_flags, "Remote Changes")
-    end
-
-    return result_flags
+local function run_git_command(args, callback)
+    vim.system(args, { cwd = git_path }, callback)
 end
 
-vim.defer_fn(function()
-    local status = check_git_status(vim.fn.stdpath("config"))
-    if #status == 0 then
-            vim.notify("Neovim config synchronized ✓")
-    else
-        for _, alert in pairs(status) do
-            vim.notify("Neovim config is not synchronized: " .. alert, "warn")
-        end
+
+local function check_git_status()
+    local result_flags = {}
+    local function check_stage(args, flag)
+        run_git_command(args, function(obj)
+            local status = vim.trim(obj.stdout or "")
+            if status == "" then
+                result_flags[flag] = false
+            else
+                result_flags[flag] = true
+            end
+
+
+            if vim.tbl_count(result_flags) == 3 then
+                local notifications = false;
+                for key, val in pairs(result_flags) do
+                    if val then
+                        vim.notify("Neovim config is not synchronized: " .. key, "WARN")
+                        notifications = true;
+                    end
+                end
+
+                if not notifications then
+                    vim.notify("Neovim config synchronized ✓")
+                end
+            end
+        end)
     end
-end, 10)
+
+    check_stage({ "git", "status", "--porcelain" }, "local-unsaved")
+    check_stage({ "git", "log", "--branches", "--not", "--remotes" }, "local-unpushed")
+    check_stage({ "git", "fetch", "&&", "git", "log", "--remotes", "--not", "--branches" }, "remote-unpulled")
+end
+
+check_git_status()

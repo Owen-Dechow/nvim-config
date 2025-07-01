@@ -56,7 +56,6 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
 vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>nd", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>cm", vim.cmd.Mason)
 
 -- Neotree
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>')
@@ -79,11 +78,11 @@ vim.keymap.set("n", "<leader>zw", "<CMD>WurdSpel bad<CR>")
 vim.keymap.set("n", "<leader>zg", "<CMD>WurdSpel good<CR>")
 
 -- Toggle line wrap
-vim.keymap.set("n", "<leader>tw", function()
+vim.api.nvim_create_user_command("ToggleWrapping", function()
     vim.wo.wrap = not vim.wo.wrap
     if vim.wo.wrap then
         vim.notify("Line wrap on")
     else
         vim.notify("Line wrap off")
     end
-end)
+end, {})
