@@ -14,6 +14,9 @@ return {
             vim.cmd("hi CursorLine guibg=#152010")                           -- Dark gray background for cursor line
             vim.cmd("hi NormalNC guibg=" .. background)                      -- Dark gray background for inactive
 
+            vim.cmd("hi TabLineFill  guibg=" .. background)                   -- Dark gray background for inactive
+            vim.cmd("hi TabLineSel guibg=#304020 guifg=" .. background)      -- Dark gray background for inactive
+
             vim.cmd("hi DiagnosticUnderlineError gui=undercurl guisp=Red")   -- Squiggly red underline for errors
             vim.cmd("hi DiagnosticUnderlineWarn gui=undercurl guisp=Yellow") -- Squiggly yellow underline for warnings
             vim.cmd("hi DiagnosticUnderlineInfo gui=undercurl guisp=Blue")   -- Squiggly blue underline for info

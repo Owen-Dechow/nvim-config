@@ -1,16 +1,10 @@
+local rust_analyzer_toggle_inlay_hint = true;
+
 return {
     {
         "mason-org/mason.nvim",
         config = function()
             require("mason").setup({})
-            -- require("mason-registry").refresh(function()
-            --     for _, name in ipairs(install) do
-            --         local p = require("mason-registry").get_package(name)
-            --         if p and not p:is_installed() then
-            --             p:install()
-            --         end
-            --     end
-            -- end)
         end
     },
     {
@@ -39,6 +33,20 @@ return {
                         }
                     },
                 },
+            })
+
+            vim.lsp.config("rust_analyzer", {
+                on_attach = function()
+                    if rust_analyzer_toggle_inlay_hint then
+                        rust_analyzer_toggle_inlay_hint = false;
+                        vim.lsp.inlay_hint.enable(true)
+                        vim.notify(
+                            "Rust Project Detected!"
+                            .. "\nInlay hints are enabled after rust project is detected."
+                            .. "\nTo disable, run `:ToggleInlayHints"
+                        )
+                    end
+                end
             })
         end
     },

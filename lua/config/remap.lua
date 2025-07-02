@@ -1,5 +1,3 @@
----@diagnostic disable: undefined-global, undefined-field
-
 -- Move lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -25,9 +23,6 @@ vim.keymap.set("n", "<leader>ch", "<CMD>noh<CR>")
 
 -- Save/Close
 vim.keymap.set("n", "<leader>bd", "<CMD>bd<CR>")
-vim.api.nvim_create_user_command("W", function() vim.cmd("w") end, {})
-vim.api.nvim_create_user_command("Wq", function() vim.cmd("wq") end, {})
-vim.api.nvim_create_user_command("Q", function() vim.cmd("q") end, {})
 
 -- Telescope
 local telescope_builtin = require('telescope.builtin')
@@ -38,6 +33,9 @@ vim.keymap.set("n", "<leader>ls", telescope_builtin.buffers)
 
 -- Undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- Neogit
+vim.keymap.set("n", "<leader>ng", "<CMD>Neogit<CR>")
 
 -- LSP
 vim.keymap.set("n", "<leader>fb", vim.lsp.buf.format)
@@ -76,13 +74,3 @@ cmp.setup({
 vim.keymap.set("n", "<leader>zz", "<CMD>WurdSpel suggest<CR>")
 vim.keymap.set("n", "<leader>zw", "<CMD>WurdSpel bad<CR>")
 vim.keymap.set("n", "<leader>zg", "<CMD>WurdSpel good<CR>")
-
--- Toggle line wrap
-vim.api.nvim_create_user_command("ToggleWrapping", function()
-    vim.wo.wrap = not vim.wo.wrap
-    if vim.wo.wrap then
-        vim.notify("Line wrap on")
-    else
-        vim.notify("Line wrap off")
-    end
-end, {})
