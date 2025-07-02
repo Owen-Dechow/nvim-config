@@ -23,6 +23,7 @@ return {
             require("notify").setup({
                 stages = "static",
                 top_down = false,
+                render="wrapped-compact",
             })
             vim.notify = require("notify")
         end
