@@ -23,9 +23,14 @@ return {
             require("notify").setup({
                 stages = "static",
                 top_down = false,
-                render="wrapped-compact",
+                render = "wrapped-compact",
             })
             vim.notify = require("notify")
         end
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        opts = {},
     }
 }
