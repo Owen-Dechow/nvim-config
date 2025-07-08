@@ -6,7 +6,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Copy to clipboard
-vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set({"n", "v"}, "<leader>y", '"+y')
 
 -- Esc same as crtl-c
 vim.keymap.set("i", "<C-c>", "<Esc>")
