@@ -26,6 +26,8 @@ return {
                 },
             })
 
+        vim.keymap.set("n", "<leader>ng", "<CMD>Neogit<CR>")
+
         vim.api.nvim_create_autocmd("FileType", {
             pattern = "DiffviewFiles",
             callback = function()

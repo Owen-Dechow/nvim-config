@@ -27,7 +27,7 @@ return {
         --     zg -> WurdSpel good
         --     zw -> WurdSpel bad
 
-        -- remap_special = false
+        remap_special = false
         -- -- Add special remaps:
         --     <leader>zz -> WurdSpel suggest
         --     <leader>zg -> WurdSpel good
