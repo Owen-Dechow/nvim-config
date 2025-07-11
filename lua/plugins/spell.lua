@@ -1,5 +1,6 @@
 return {
     "Owen-Dechow/nvim_wurd_spel",
+    -- dir = "C:\\Users\\owend\\Desktop\\nvim_wurd_spell",
     opts = {
         -- severity = vim.diagnostic.severity.INFO,
         -- -- Set the severity level of spelling errors:
@@ -27,7 +28,7 @@ return {
         --     zg -> WurdSpel good
         --     zw -> WurdSpel bad
 
-        remap_special = false
+        remap_special = true,
         -- -- Add special remaps:
         --     <leader>zz -> WurdSpel suggest
         --     <leader>zg -> WurdSpel good
