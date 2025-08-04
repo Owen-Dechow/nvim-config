@@ -35,7 +35,8 @@ local function check_git_status()
 
     check_stage({ "git", "status", "--porcelain" }, "local-unsaved")
     check_stage({ "git", "log", "--branches", "--not", "--remotes" }, "local-unpushed")
-    check_stage({ "git", "fetch", "&&", "git", "log", "--remotes", "--not", "--branches" }, "remote-unpulled")
+    run_git_command({ "git", "fetch" }, function() end)
+    check_stage({ "git", "log", "--remotes", "--not", "--branches" }, "remote-unpulled")
 end
 
 check_git_status()

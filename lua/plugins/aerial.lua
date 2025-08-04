@@ -4,6 +4,8 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "nvim-tree/nvim-web-devicons"
     },
+    cmd = "AerialToggle",
+    keys = "<leader>a",
     config = function()
         require("aerial").setup({
             layout = {

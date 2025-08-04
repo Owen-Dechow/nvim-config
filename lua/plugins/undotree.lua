@@ -1,5 +1,6 @@
 return {
     "mbbill/undotree",
+    event = "BufEnter",
     config = function()
         vim.g.undotree_DiffCommand = "git diff"
         vim.g.undotree_WindowLayout = 3
