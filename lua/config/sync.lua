@@ -21,7 +21,12 @@ local function check_git_status()
                 local notifications = false;
                 for key, val in pairs(result_flags) do
                     if val then
-                        vim.notify("Neovim config is not synchronized: " .. key, "WARN")
+                        vim.notify("Neovim config is not synchronized: " .. key .. ".", "WARN")
+
+                        if key == "remote-unpulled" then
+                            vim.notify("Run `:PullRemoteConfig` to pull remote config.")
+                        end
+
                         notifications = true;
                     end
                 end
@@ -40,3 +45,9 @@ local function check_git_status()
 end
 
 check_git_status()
+
+vim.api.nvim_create_user_command("PullRemoteConfig", function()
+    run_git_command({ "git", "pull --rebase" }, function(out)
+        vim.notify("Ran `git pull --rebase`. " .. out.stdout)
+    end)
+end, {})
