@@ -4,26 +4,36 @@ return {
     {
         "mason-org/mason.nvim",
         config = function()
-            require("mason").setup({})
+            require("mason").setup({
+                registries = {
+                    "github:mason-org/mason-registry", -- Default registry
+                    "github:nvim-java/mason-registry", -- Example: Java-specific registry
+                }
+            })
         end
     },
     {
         "mason-org/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup(
-                {
-                    ensure_installed = {
-                        "lua_ls",
-                        "fortls",
-                        "jsonls",
-                        "basedpyright",
-                        "oxlint",
-                        "markdown_oxide",
-                        "rust_analyzer",
-                        "sourcery",
-                        "taplo",
-                    }
-                })
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "fortls",
+                    "jsonls",
+                    "basedpyright",
+                    "oxlint",
+                    "markdown_oxide",
+                    "rust_analyzer",
+                    "sourcery",
+                    "taplo",
+                    "clangd",
+                    "jdtls",
+                    "omnisharp",
+                },
+                automatic_enable = {
+                    exclude = { "jdtls" }
+                }
+            })
 
             vim.lsp.config("basedpyright", {
                 settings = {
@@ -68,7 +78,6 @@ return {
             })
             local null_ls = require("null-ls")
             null_ls.setup({
-
                 sources = {
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.findent,

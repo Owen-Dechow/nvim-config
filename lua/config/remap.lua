@@ -11,6 +11,9 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 -- Esc same as crtl-c
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
+-- Exit Terminal Esc
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
 -- Do not deselect after u/U
 vim.keymap.set("v", "U", "U<leader>gv")
 vim.keymap.set("v", "u", "u<leader>gv")

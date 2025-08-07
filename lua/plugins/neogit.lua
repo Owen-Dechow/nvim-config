@@ -11,7 +11,7 @@ return {
         "folke/snacks.nvim",             -- optional
     },
     cmd = "Neogit",
-    key = "<leader>ng",
+    keys = "<leader>ng",
     config = function()
         require("neogit").setup(
             {
