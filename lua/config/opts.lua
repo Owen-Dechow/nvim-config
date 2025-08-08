@@ -42,22 +42,3 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end,
 })
 
--- Diagnostic
-vim.diagnostic.config({
-    float = {
-        border = "rounded",
-    },
-})
-
-local last_pos = nil;
-vim.api.nvim_create_autocmd("CursorHold", {
-    callback = function()
-        local current_pos = table.concat(vim.api.nvim_win_get_cursor(0), ",")
-        if current_pos ~= last_pos then
-            vim.diagnostic.open_float(nil, { focusable = false })
-            last_pos = current_pos
-        end
-    end,
-})
-
-vim.o.updatetime = 500

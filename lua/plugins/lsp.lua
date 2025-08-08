@@ -13,6 +13,12 @@ return {
         end
     },
     {
+        "Issafalcon/lsp-overloads.nvim",
+        config = function()
+            vim.keymap.set('n', '<leader>ol', '<Cmd>LspOverloadsSignature<CR>')
+        end
+    },
+    {
         "mason-org/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
@@ -56,6 +62,19 @@ return {
                             .. "\nTo disable, run `:ToggleInlayHints"
                         )
                     end
+                end
+            })
+
+            vim.lsp.config("omnisharp", {
+                on_attach = function(client)
+                    require('lsp-overloads').setup(client, {
+                        keymaps = {
+                            next_signature = "<C-j>",
+                            previous_signature = "<C-k>",
+                            close_signature = "<Esc>",
+                        },
+                        display_automatically = false,
+                    })
                 end
             })
         end
