@@ -1,6 +1,6 @@
 return {
     "Owen-Dechow/videre.nvim",
-    -- dir = "~\\Desktop\\nvim_json_graph_view",
+    -- dir = "~\\Desktop\\videre.nvim",
     cmd = "Videre",
     dependencies = {
         {

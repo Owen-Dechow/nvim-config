@@ -25,6 +25,23 @@ return {
                         ".classpath"
                     },
                     { upward = true })[1]),
+                on_attach = function(client)
+                    require('lsp-overloads').setup(client, {
+                        keymaps = {
+                            next_signature = "<C-j>",
+                            previous_signature = "<C-k>",
+                            close_signature = "<Tab>",
+                        },
+                        display_automatically = true,
+                        silent = false,
+                        ui = {
+                            max_width = 60,
+                            border = "rounded",
+                            max_height = 5,
+                            floating_window_above_cur_line = true,
+                        }
+                    })
+                end
             }
 
             vim.api.nvim_create_autocmd("FileType", {

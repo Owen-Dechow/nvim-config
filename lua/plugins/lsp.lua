@@ -12,36 +12,57 @@ return {
             })
         end
     },
-    {
-        "Issafalcon/lsp-overloads.nvim",
-        config = function()
-            vim.keymap.set('n', '<leader>ol', '<Cmd>LspOverloadsSignature<CR>')
-        end
-    },
+    { "Issafalcon/lsp-overloads.nvim", },
     {
         "mason-org/mason-lspconfig.nvim",
         config = function()
+            local dont_auto_setup = {}
+            local function L(lsp)
+                dont_auto_setup[lsp] = true
+                return lsp
+            end
+
+            local lsps = {
+                "lua_ls",
+                "fortls",
+                L "jsonls",
+                "basedpyright",
+                L "oxlint",
+                L "markdown_oxide",
+                "rust_analyzer",
+                L "taplo",
+                "clangd",
+                "jdtls",
+                "omnisharp",
+            }
+
+
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "fortls",
-                    "jsonls",
-                    "basedpyright",
-                    "oxlint",
-                    "markdown_oxide",
-                    "rust_analyzer",
-                    "sourcery",
-                    "taplo",
-                    "clangd",
-                    "jdtls",
-                    "omnisharp",
-                },
+                ensure_installed = lsps,
                 automatic_enable = {
                     exclude = { "jdtls" }
                 }
             })
 
-            vim.lsp.config("basedpyright", {
+            local function on_attach(client)
+                require('lsp-overloads').setup(client, {
+                    keymaps = {
+                        next_signature = "<C-j>",
+                        previous_signature = "<C-k>",
+                        close_signature = "<Tab>",
+                    },
+                    display_automatically = true,
+                    silent = false,
+                    ui = {
+                        max_width = 60,
+                        border = "rounded",
+                        max_height = 5,
+                        floating_window_above_cur_line = true,
+                    }
+                })
+            end
+
+            vim.lsp.config(L "basedpyright", {
                 settings = {
                     basedpyright = {
                         analysis = {
@@ -49,10 +70,11 @@ return {
                         }
                     },
                 },
+                on_attach = on_attach
             })
 
-            vim.lsp.config("rust_analyzer", {
-                on_attach = function()
+            vim.lsp.config(L "rust_analyzer", {
+                on_attach = function(client)
                     if rust_analyzer_toggle_inlay_hint then
                         rust_analyzer_toggle_inlay_hint = false;
                         vim.lsp.inlay_hint.enable(true)
@@ -62,21 +84,17 @@ return {
                             .. "\nTo disable, run `:ToggleInlayHints"
                         )
                     end
+                    on_attach(client)
                 end
             })
 
-            vim.lsp.config("omnisharp", {
-                on_attach = function(client)
-                    require('lsp-overloads').setup(client, {
-                        keymaps = {
-                            next_signature = "<C-j>",
-                            previous_signature = "<C-k>",
-                            close_signature = "<Esc>",
-                        },
-                        display_automatically = false,
-                    })
+            for _, lsp in pairs(lsps) do
+                if not dont_auto_setup[lsp] then
+                    vim.lsp.config(lsp, {
+                        on_attach = on_attach
+                    });
                 end
-            })
+            end
         end
     },
     {

@@ -10,6 +10,7 @@ end
 local file_ignore_patterns = {
     "bin/",
     "obj/",
+    "%.class",
 }
 
 for k, v in pairs(file_ignore_patterns) do
