@@ -30,7 +30,7 @@ return {
                         keymaps = {
                             next_signature = "<C-j>",
                             previous_signature = "<C-k>",
-                            close_signature = "<Tab>",
+                            close_signature = "<C-c>",
                         },
                         display_automatically = true,
                         silent = false,

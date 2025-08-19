@@ -1,7 +1,7 @@
 return {
     "Owen-Dechow/videre.nvim",
     -- dir = "~\\Desktop\\videre.nvim",
-    cmd = "Videre",
+    -- cmd = "Videre",
     dependencies = {
         {
             "Owen-Dechow/graph_view_yaml_parser",

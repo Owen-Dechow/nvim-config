@@ -6,10 +6,23 @@ return {
         config = function()
             require("mason").setup({
                 registries = {
-                    "github:mason-org/mason-registry", -- Default registry
-                    "github:nvim-java/mason-registry", -- Example: Java-specific registry
+                    "github:mason-org/mason-registry",
+                    "github:nvim-java/mason-registry",
+                    "github:Crashdummyy/mason-registry",
                 }
             })
+            local registry = require("mason-registry")
+
+            local ensure_installed = {
+                "roslyn",
+            }
+
+            for _, pkg_name in ipairs(ensure_installed) do
+                local ok, pkg = pcall(registry.get_package, pkg_name)
+                if ok and not pkg:is_installed() then
+                    pkg:install()
+                end
+            end
         end
     },
     { "Issafalcon/lsp-overloads.nvim", },
@@ -33,7 +46,6 @@ return {
                 L "taplo",
                 "clangd",
                 "jdtls",
-                "omnisharp",
             }
 
 
@@ -49,7 +61,7 @@ return {
                     keymaps = {
                         next_signature = "<C-j>",
                         previous_signature = "<C-k>",
-                        close_signature = "<Tab>",
+                        close_signature = "<C-c>",
                     },
                     display_automatically = true,
                     silent = false,

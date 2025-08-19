@@ -3,28 +3,32 @@ return {
         "tiagovla/tokyodark.nvim",
         config = function()
             local background = "#0a0a0a"
+
+            -- Set colorscheme
             vim.cmd("colorscheme tokyodark")
-            vim.cmd("hi Normal guibg=" .. background)                        -- Dark gray background
-            vim.cmd("hi NonText guibg=" .. background)                       -- Ensures empty areas match
-            vim.cmd("hi EndOfBuffer guibg=" .. background)                   -- Covers the end of buffer
-            vim.cmd("hi NormalFloat guibg=" .. background)                   -- Covers the end of buffer
-            vim.cmd("hi SignColumn guibg=" .. background)                    -- Dark gray background for sign column
-            vim.cmd("set cursorline")                                        -- Enable Cursor line
-            vim.cmd("hi CursorLine guibg=#152010")                           -- Dark gray background for cursor line
-            vim.cmd("hi NormalNC guibg=" .. background)                      -- Dark gray background for inactive
 
-            vim.cmd("hi TabLineFill  guibg=" .. background)                  -- Dark gray background for inactive
-            vim.cmd("hi TabLineSel guibg=#304020 guifg=" .. background)      -- Dark gray background for inactive
+            -- Highlight groups
+            local hl = vim.api.nvim_set_hl
+            hl(0, "Normal", { bg = background })
+            hl(0, "NonText", { bg = background })
+            hl(0, "EndOfBuffer", { bg = background })
+            hl(0, "NormalFloat", { bg = background })
+            hl(0, "SignColumn", { bg = background })
+            hl(0, "CursorLine", { bg = "#152010" })
+            hl(0, "NormalNC", { bg = background })
+            hl(0, "TabLineFill", { bg = background })
+            hl(0, "TabLineSel", { bg = "#304020", fg = background })
+            hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "Red" })
+            hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "Yellow" })
+            hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "Blue" })
+            hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "Green" })
+            hl(0, "CursorLineNr", { fg = "#608040", bold = true })
+            hl(0, "ColorColumn", { bg = "#0f0f0f" })
+            hl(0, "@structure", { fg = "#caca66", italic=true })
 
-            vim.cmd("hi DiagnosticUnderlineError gui=undercurl guisp=Red")   -- Squiggly red underline for errors
-            vim.cmd("hi DiagnosticUnderlineWarn gui=undercurl guisp=Yellow") -- Squiggly yellow underline for warnings
-            vim.cmd("hi DiagnosticUnderlineInfo gui=undercurl guisp=Blue")   -- Squiggly blue underline for info
-            vim.cmd("hi DiagnosticUnderlineHint gui=undercurl guisp=Green")  -- Squiggly green underline for hints
-
-            vim.cmd("hi CursorLineNr guifg=#608040 gui=bold")                -- Cursor line color
-
-            vim.o.colorcolumn = "80"                                         -- Highlights columns 72, 80, and 100
-            vim.cmd("hi ColorColumn guibg=#0f0f0f")                          -- Dark gray background for color column
+            -- Options
+            vim.opt.cursorline = true
+            vim.opt.colorcolumn = "80"
         end
     },
 }
