@@ -1,6 +1,5 @@
-local rust_analyzer_toggle_inlay_hint = true;
-
 return {
+    -- Mason core
     {
         "mason-org/mason.nvim",
         config = function()
@@ -8,14 +7,12 @@ return {
                 registries = {
                     "github:mason-org/mason-registry",
                     "github:nvim-java/mason-registry",
-                    "github:Crashdummyy/mason-registry",
-                }
+                    "github:crashdummyy/mason-registry",
+                },
             })
-            local registry = require("mason-registry")
 
-            local ensure_installed = {
-                "roslyn",
-            }
+            local registry = require("mason-registry")
+            local ensure_installed = { "roslyn" }
 
             for _, pkg_name in ipairs(ensure_installed) do
                 local ok, pkg = pcall(registry.get_package, pkg_name)
@@ -23,117 +20,83 @@ return {
                     pkg:install()
                 end
             end
-        end
+        end,
     },
-    { "Issafalcon/lsp-overloads.nvim", },
+
+    -- Mason-LSPConfig bridge
     {
         "mason-org/mason-lspconfig.nvim",
         config = function()
-            local dont_auto_setup = {}
-            local function L(lsp)
-                dont_auto_setup[lsp] = true
-                return lsp
+            local lspconfig = require("lspconfig")
+
+            local custom_setup = {}
+
+            function C(server)
+                custom_setup[server] = true
             end
 
             local lsps = {
                 "lua_ls",
                 "fortls",
-                L "jsonls",
-                "basedpyright",
-                L "oxlint",
-                L "markdown_oxide",
-                "rust_analyzer",
-                L "taplo",
                 "clangd",
-                "jdtls",
+                "html",
+                "jsonls",
+                C "basedpyright",
+                "oxlint",
+                "markdown_oxide",
+                C "rust_analyzer",
+                "taplo",
+                C "jdtls",
+                "emmet_language_server",
+                "ruff",
             }
-
 
             require("mason-lspconfig").setup({
                 ensure_installed = lsps,
-                automatic_enable = {
-                    exclude = { "jdtls" }
-                }
+                automatic_installation = true,
             })
 
-            local function on_attach(client)
-                require('lsp-overloads').setup(client, {
-                    keymaps = {
-                        next_signature = "<C-j>",
-                        previous_signature = "<C-k>",
-                        close_signature = "<C-c>",
-                    },
-                    display_automatically = true,
-                    silent = false,
-                    ui = {
-                        max_width = 60,
-                        border = "rounded",
-                        max_height = 5,
-                        floating_window_above_cur_line = true,
-                    }
-                })
-            end
-
-            vim.lsp.config(L "basedpyright", {
+            lspconfig.basedpyright.setup({
                 settings = {
                     basedpyright = {
                         analysis = {
-                            typeCheckingMode = "off",
-                        }
+                            typecheckingmode = "off",
+                        },
                     },
                 },
-                on_attach = on_attach
             })
 
-            vim.lsp.config(L "rust_analyzer", {
-                on_attach = function(client)
+            local rust_analyzer_toggle_inlay_hint = true
+            lspconfig.rust_analyzer.setup({
+                on_attach = function(_)
                     if rust_analyzer_toggle_inlay_hint then
-                        rust_analyzer_toggle_inlay_hint = false;
+                        rust_analyzer_toggle_inlay_hint = false
                         vim.lsp.inlay_hint.enable(true)
                         vim.notify(
-                            "Rust Project Detected!"
-                            .. "\nInlay hints are enabled after rust project is detected."
-                            .. "\nTo disable, run `:ToggleInlayHints"
+                            "Rust project detected!\nInlay hints enabled.\nRun `:ToggleInlayHints` to disable."
                         )
                     end
-                    on_attach(client)
-                end
+                end,
             })
 
-            for _, lsp in pairs(lsps) do
-                if not dont_auto_setup[lsp] then
-                    vim.lsp.config(lsp, {
-                        on_attach = on_attach
-                    });
+            for _, lsp in ipairs(lsps) do
+                if not custom_setup[lsp] then
+                    lspconfig[lsp].setup({})
                 end
             end
-        end
+        end,
     },
+
+    -- TS tools
     {
-        "neovim/nvim-lspconfig",
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
     },
+
+    -- Core LSPConfig
+    { "neovim/nvim-lspconfig" },
+
+    -- Null-ls for formatters
     { "nvimtools/none-ls.nvim" },
-    {
-        "jay-babu/mason-null-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            require("mason-null-ls").setup({
-                ensure_installed = {
-                    "black",
-                    "djlint",
-                    "findent",
-                    "cbfmt",
-                },
-            })
-            local null_ls = require("null-ls")
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.findent,
-                    null_ls.builtins.formatting.cbfmt,
-                    null_ls.builtins.formatting.djlint,
-                },
-            })
-        end
-    },
 }

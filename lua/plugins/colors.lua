@@ -7,6 +7,7 @@ return {
             -- Set colorscheme
             vim.cmd("colorscheme tokyodark")
 
+
             -- Highlight groups
             local hl = vim.api.nvim_set_hl
             hl(0, "Normal", { bg = background })
@@ -24,7 +25,7 @@ return {
             hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "Green" })
             hl(0, "CursorLineNr", { fg = "#608040", bold = true })
             hl(0, "ColorColumn", { bg = "#0f0f0f" })
-            hl(0, "@structure", { fg = "#caca66", italic=true })
+            hl(0, "@structure", { fg = "#caca66", italic = true })
 
             -- Options
             vim.opt.cursorline = true

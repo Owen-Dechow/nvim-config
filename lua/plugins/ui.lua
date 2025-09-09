@@ -19,6 +19,7 @@ return {
     },
     {
         "rcarriga/nvim-notify",
+        dependencies = {"nvim-telescope/telescope-ui-select.nvim"},
         config = function()
             require("notify").setup({
                 stages = "static",
