@@ -26,14 +26,12 @@ return {
     -- Mason-LSPConfig bridge
     {
         "mason-org/mason-lspconfig.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "mason-org/mason.nvim",
+        },
         config = function()
             local lspconfig = require("lspconfig")
-
-            local custom_setup = {}
-
-            function C(server)
-                custom_setup[server] = true
-            end
 
             local lsps = {
                 "lua_ls",
@@ -41,26 +39,22 @@ return {
                 "clangd",
                 "html",
                 "jsonls",
-                C "basedpyright",
+                "basedpyright",
                 "oxlint",
                 "markdown_oxide",
-                C "rust_analyzer",
+                "rust_analyzer",
                 "taplo",
-                C "jdtls",
+                "jdtls",
                 "emmet_language_server",
                 "ruff",
             }
 
-            require("mason-lspconfig").setup({
-                ensure_installed = lsps,
-                automatic_installation = true,
-            })
 
             lspconfig.basedpyright.setup({
                 settings = {
                     basedpyright = {
                         analysis = {
-                            typecheckingmode = "off",
+                            typeCheckingMode = "basic",
                         },
                     },
                 },
@@ -79,11 +73,10 @@ return {
                 end,
             })
 
-            for _, lsp in ipairs(lsps) do
-                if not custom_setup[lsp] then
-                    lspconfig[lsp].setup({})
-                end
-            end
+            require("mason-lspconfig").setup({
+                ensure_installed = lsps,
+                automatic_installation = true,
+            })
         end,
     },
 
@@ -91,11 +84,19 @@ return {
     {
         "pmizio/typescript-tools.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        opts = {},
+        opts = {
+            settings = {
+                tsserver_format_options = {
+                    semicolons = 'insert'
+                }
+            }
+        },
     },
 
     -- Core LSPConfig
-    { "neovim/nvim-lspconfig" },
+    {
+        "neovim/nvim-lspconfig",
+    },
 
     -- Null-ls for formatters
     { "nvimtools/none-ls.nvim" },
