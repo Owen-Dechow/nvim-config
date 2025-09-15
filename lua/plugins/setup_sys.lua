@@ -6,6 +6,7 @@ return {
     end,
     dependencies = {
         "rcarriga/nvim-notify",
+        "lewis6991/gitsigns.nvim",
         "tiagovla/tokyodark.nvim",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/nvim-cmp",
