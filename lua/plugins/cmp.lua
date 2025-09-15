@@ -1,13 +1,15 @@
 return {
-    { "hrsh7th/cmp-nvim-lsp" },
     {
         "L3MON4D3/LuaSnip",
+        lazy = true,
         dependencies = {
             "saadparwaiz1/cmp_luasnip",
         }
     },
     {
         "hrsh7th/nvim-cmp",
+        lazy = true,
+        dependencies = { "hrsh7th/cmp-nvim-lsp" },
         config = function()
             local cmp = require 'cmp'
 

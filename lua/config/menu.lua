@@ -96,4 +96,5 @@ vim.api.nvim_create_autocmd("WinResized", {
     end
 })
 
+
 vim.api.nvim_create_user_command("OpenStartMenu", render_start_screen, {})

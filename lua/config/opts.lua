@@ -26,21 +26,9 @@ vim.o.writebackup = false
 vim.o.undodir = vim.env.HOME .. "/.vim/undodir"
 vim.o.undofile = true
 
-vim.o.scrolloff = 8
 vim.opt.fillchars = { eob = " " }
 vim.diagnostic.enable()
 
 vim.wo.wrap = false
 
 vim.o.winborder = 'rounded'
-
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = "quickfix",
-    callback = function()
-        vim.schedule(function()
-            vim.cmd("cclose")
-            require('telescope.builtin').quickfix()
-        end)
-    end,
-})
-

@@ -2,6 +2,7 @@ return {
     -- Mason core
     {
         "mason-org/mason.nvim",
+        lazy = true,
         config = function()
             require("mason").setup({
                 registries = {
@@ -26,6 +27,7 @@ return {
     -- Mason-LSPConfig bridge
     {
         "mason-org/mason-lspconfig.nvim",
+        lazy = true,
         dependencies = {
             "neovim/nvim-lspconfig",
             "mason-org/mason.nvim",
@@ -72,7 +74,6 @@ return {
                     end
                 end,
             })
-
             require("mason-lspconfig").setup({
                 ensure_installed = lsps,
                 automatic_installation = true,
@@ -83,6 +84,7 @@ return {
     -- TS tools
     {
         "pmizio/typescript-tools.nvim",
+        lazy = true,
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         opts = {
             settings = {
@@ -96,8 +98,12 @@ return {
     -- Core LSPConfig
     {
         "neovim/nvim-lspconfig",
+        lazy = true,
     },
 
     -- Null-ls for formatters
-    { "nvimtools/none-ls.nvim" },
+    {
+        "nvimtools/none-ls.nvim",
+        lazy = true,
+    },
 }
