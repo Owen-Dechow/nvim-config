@@ -15,7 +15,7 @@ return {
             "echasnovski/mini.pick",     -- optional
             "folke/snacks.nvim",         -- optional
         },
-        cmd = "Neogit",
+        event = "VeryLazy",
         keys = "<leader>ng",
         config = function()
             require("neogit").setup(

@@ -1,7 +1,7 @@
 return {
     {
         "nvim-telescope/telescope-ui-select.nvim",
-        lazy = true,
+        event = "VeryLazy",
         config = function()
             require("telescope").setup {
                 extensions = {
@@ -30,7 +30,7 @@ return {
     },
     {
         "rcarriga/nvim-notify",
-        lazy = true,
+        event = "VeryLazy",
         dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
         config = function()
             ---@param msg string
@@ -48,7 +48,7 @@ return {
     },
     {
         'nvim-lualine/lualine.nvim',
-        lazy = true,
+        event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         opts = {
             options = {

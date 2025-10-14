@@ -1,6 +1,6 @@
 return {
     "seblyng/roslyn.nvim",
-    ft = "cs",
+    event = "VeryLazy",
     config = function()
         require("roslyn").setup()
         vim.lsp.config("roslyn", {

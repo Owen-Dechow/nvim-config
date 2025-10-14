@@ -1,6 +1,6 @@
 return {
     "Owen-Dechow/nvim_wurd_spel",
-    lazy = true,
+    event = "VeryLazy",
     opts = {
         remap_special = true,
     }

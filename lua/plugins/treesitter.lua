@@ -1,7 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        lazy = true,
+        event = "VeryLazy",
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -13,7 +13,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
-        event = "BufReadPost",
+        event = "VeryLazy",
         opts = {
             enable = true,
             max_lines = 3,

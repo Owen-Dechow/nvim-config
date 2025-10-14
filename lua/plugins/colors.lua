@@ -24,6 +24,7 @@ return {
             hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "Blue" })
             hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "Green" })
             hl(0, "CursorLineNr", { fg = "#608040", bold = true })
+            hl(0, "LspInlayHint", { fg = "#505050", bold = true })
             hl(0, "ColorColumn", { bg = "#0f0f0f" })
             hl(0, "@structure", { fg = "#caca66", italic = true })
 

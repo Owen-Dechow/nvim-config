@@ -2,7 +2,7 @@ return {
     -- Mason core
     {
         "mason-org/mason.nvim",
-        lazy = true,
+        event = "VeryLazy",
         config = function()
             require("mason").setup({
                 registries = {
@@ -27,7 +27,7 @@ return {
     -- Mason-LSPConfig bridge
     {
         "mason-org/mason-lspconfig.nvim",
-        lazy = true,
+        event = "VeryLazy",
         dependencies = {
             "neovim/nvim-lspconfig",
             "mason-org/mason.nvim",
@@ -57,26 +57,20 @@ return {
                     basedpyright = {
                         analysis = {
                             typeCheckingMode = "basic",
+                            reportUnannotatedClassAttribute = false
                         },
                     },
                 },
             })
 
-            local rust_analyzer_toggle_inlay_hint = true
-            lspconfig.rust_analyzer.setup({
-                on_attach = function(_)
-                    if rust_analyzer_toggle_inlay_hint then
-                        rust_analyzer_toggle_inlay_hint = false
-                        vim.lsp.inlay_hint.enable(true)
-                        vim.notify(
-                            "Rust project detected!\nInlay hints enabled.\nRun `:ToggleInlayHints` to disable."
-                        )
-                    end
-                end,
-            })
             require("mason-lspconfig").setup({
                 ensure_installed = lsps,
                 automatic_installation = true,
+                automatic_enable = {
+                    exclude = {
+                        "rust_analyzer",
+                    }
+                }
             })
         end,
     },
@@ -84,7 +78,7 @@ return {
     -- TS tools
     {
         "pmizio/typescript-tools.nvim",
-        lazy = true,
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         opts = {
             settings = {
@@ -98,12 +92,31 @@ return {
     -- Core LSPConfig
     {
         "neovim/nvim-lspconfig",
-        lazy = true,
+        event = "VeryLazy",
+    },
+
+
+    {
+        'mrcjkb/rustaceanvim',
+        event = "VeryLazy",
+        config = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    settings = {
+                        ['rust-analyzer'] = {
+                            diagnostics = {
+                                disabled = { "unnecessary_return" },
+                            },
+                        },
+                    },
+                },
+            }
+        end
     },
 
     -- Null-ls for formatters
     {
         "nvimtools/none-ls.nvim",
-        lazy = true,
+        event = "VeryLazy",
     },
 }

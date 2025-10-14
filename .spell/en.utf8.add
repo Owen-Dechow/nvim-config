@@ -101,3 +101,7 @@ seblyng
 tsserver
 param
 gitsigns
+blankline
+dapui
+bufnr
+Unannotated
