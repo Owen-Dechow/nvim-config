@@ -52,12 +52,12 @@ return {
             }
 
 
-            lspconfig.basedpyright.setup({
+            vim.lsp.config("basedpyright", {
                 settings = {
                     basedpyright = {
                         analysis = {
                             typeCheckingMode = "basic",
-                            reportUnannotatedClassAttribute = false
+                            reportUnannotatedClassAttribute = false,
                         },
                     },
                 },
