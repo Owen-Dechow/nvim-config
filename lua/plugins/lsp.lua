@@ -2,7 +2,6 @@ return {
     -- Mason core
     {
         "mason-org/mason.nvim",
-        event = "VeryLazy",
         config = function()
             require("mason").setup({
                 registries = {
@@ -27,7 +26,6 @@ return {
     -- Mason-LSPConfig bridge
     {
         "mason-org/mason-lspconfig.nvim",
-        event = "VeryLazy",
         dependencies = {
             "neovim/nvim-lspconfig",
             "mason-org/mason.nvim",
@@ -78,7 +76,6 @@ return {
     -- TS tools
     {
         "pmizio/typescript-tools.nvim",
-        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         opts = {
             settings = {
@@ -92,13 +89,11 @@ return {
     -- Core LSPConfig
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
     },
 
 
     {
         'mrcjkb/rustaceanvim',
-        event = "VeryLazy",
         config = function()
             vim.g.rustaceanvim = {
                 server = {
@@ -117,6 +112,5 @@ return {
     -- Null-ls for formatters
     {
         "nvimtools/none-ls.nvim",
-        event = "VeryLazy",
     },
 }
