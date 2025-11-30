@@ -12,12 +12,31 @@ return {
             })
 
             local registry = require("mason-registry")
-            local ensure_installed = { "roslyn" }
+            local ensure_installed = {
+                "roslyn",
+                "lua-language-server",
+                "fortls",
+                "clangd",
+                "html-lsp",
+                "json-lsp",
+                "basedpyright",
+                "oxlint",
+                "markdown-oxide",
+                "rust-analyzer",
+                "taplo",
+                "jdtls",
+                "emmet-language-server",
+                "ruff",
+                "omnisharp",
+                "css-lsp",
+            }
 
             for _, pkg_name in ipairs(ensure_installed) do
                 local ok, pkg = pcall(registry.get_package, pkg_name)
                 if ok and not pkg:is_installed() then
                     pkg:install()
+                elseif not ok then
+                    vim.notify("Error on Mason registry " .. pkg_name)
                 end
             end
         end,
@@ -31,25 +50,6 @@ return {
             "mason-org/mason.nvim",
         },
         config = function()
-            local lspconfig = require("lspconfig")
-
-            local lsps = {
-                "lua_ls",
-                "fortls",
-                "clangd",
-                "html",
-                "jsonls",
-                "basedpyright",
-                "oxlint",
-                "markdown_oxide",
-                "rust_analyzer",
-                "taplo",
-                "jdtls",
-                "emmet_language_server",
-                "ruff",
-            }
-
-
             vim.lsp.config("basedpyright", {
                 settings = {
                     basedpyright = {
@@ -61,12 +61,17 @@ return {
                 },
             })
 
+            vim.lsp.config("omnisharp", {
+                enable_import_completion = true,
+                organize_imports_on_format = true,
+                enable_roslyn_analyzers = true,
+            })
+
             require("mason-lspconfig").setup({
-                ensure_installed = lsps,
-                automatic_installation = true,
                 automatic_enable = {
                     exclude = {
                         "rust_analyzer",
+                        -- "omnisharp",
                     }
                 }
             })

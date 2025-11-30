@@ -21,7 +21,6 @@ return {
                     end)
                 end,
             })
-
         end
     },
     {
@@ -55,5 +54,5 @@ return {
                 globalstatus = true,
             }
         },
-    }
+    },
 }

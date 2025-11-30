@@ -11,6 +11,13 @@ local file_ignore_patterns = {
     "bin/",
     "obj/",
     "%.class",
+    "%.meta",
+    "%.xsd",
+    "%.asset",
+    "%.wav",
+    "%.png",
+    "%.jpg",
+    "%.jpeg",
     "node_modules/",
 }
 

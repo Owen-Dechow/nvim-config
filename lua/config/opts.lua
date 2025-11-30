@@ -28,6 +28,7 @@ vim.o.undofile = true
 
 vim.opt.fillchars = { eob = " " }
 vim.diagnostic.enable()
+vim.diagnostic.config({ virtual_text = true })
 
 vim.wo.wrap = false
 

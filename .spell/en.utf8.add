@@ -107,3 +107,10 @@ bufnr
 Unannotated
 filetype
 augroup
+mrcjkb
+rustaceanvim
+csproj
+editorconfig
+getpid
+languageserver
+tostring
