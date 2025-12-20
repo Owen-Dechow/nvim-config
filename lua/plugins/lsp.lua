@@ -29,6 +29,7 @@ return {
                 "ruff",
                 "omnisharp",
                 "css-lsp",
+                "djlint",
             }
 
             for _, pkg_name in ipairs(ensure_installed) do
@@ -114,8 +115,30 @@ return {
         end
     },
 
-    -- Null-ls for formatters
     {
-        "nvimtools/none-ls.nvim",
-    },
+        "jay-babu/mason-null-ls.nvim",
+        dependencies = {
+            "mason-org/mason.nvim",
+            "nvimtools/none-ls.nvim",
+        },
+        event = "VeryLazy",
+        config = function()
+            local null_ls = require("null-ls")
+
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.djlint.with({
+                        extra_args = { "--profile=django",
+                            "--max-blank-lines", "1",
+                            "--blank-line-after-tag", "extends",
+                            "--format-attribute-template-tags",
+                            "--format-css", "--format-js",
+                            "--max-line-length", "120",
+                            "--quiet",
+                        }
+                    }),
+                },
+            })
+        end
+    }
 }
