@@ -72,7 +72,7 @@ return {
                 automatic_enable = {
                     exclude = {
                         "rust_analyzer",
-                        -- "omnisharp",
+                        "omnisharp",
                     }
                 }
             })
