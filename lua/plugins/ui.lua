@@ -42,33 +42,15 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        opts = {
-            options = {
-                globalstatus = true,
-            }
-        },
+        config = function()
+            require("lualine").setup({
+                options = {
+                    globalstatus = true,
+                }
+            })
+        end
     },
     { "lewis6991/gitsigns.nvim" },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {
-            preset = "helix",
-            keys = {
-                scroll_down = "",
-                scroll_up = "",
-            }
-        },
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ global = false })
-                end,
-                desc = "Buffer Local Keymaps (which-key)",
-            },
-        },
-    },
     {
         "hedyhli/outline.nvim",
         config = function()
@@ -82,9 +64,9 @@ return {
         end,
     },
     {
-  'nacro90/numb.nvim',
-  config = function()
-    require('numb').setup()
-  end,
-}
+        'nacro90/numb.nvim',
+        config = function()
+            require('numb').setup()
+        end,
+    }
 }
