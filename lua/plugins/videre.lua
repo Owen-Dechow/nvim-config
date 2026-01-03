@@ -1,6 +1,5 @@
 return {
     "Owen-Dechow/videre.nvim",
-    event = "VeryLazy",
     dependencies = {
         "Owen-Dechow/graph_view_yaml_parser",
         "a-usr/xml2lua.nvim",

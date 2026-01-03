@@ -1,7 +1,6 @@
 return {
     {
         "nvim-telescope/telescope-ui-select.nvim",
-        event = "VeryLazy",
         config = function()
             require("telescope").setup {
                 extensions = {
@@ -24,12 +23,7 @@ return {
         end
     },
     {
-        "Fildo7525/pretty_hover",
-        event = "LspAttach",
-    },
-    {
         "rcarriga/nvim-notify",
-        event = "VeryLazy",
         dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
         config = function()
             ---@param msg string
@@ -47,7 +41,6 @@ return {
     },
     {
         'nvim-lualine/lualine.nvim',
-        event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         opts = {
             options = {
@@ -55,4 +48,43 @@ return {
             }
         },
     },
+    { "lewis6991/gitsigns.nvim" },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            preset = "helix",
+            keys = {
+                scroll_down = "",
+                scroll_up = "",
+            }
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
+            },
+        },
+    },
+    {
+        "hedyhli/outline.nvim",
+        config = function()
+            -- Example mapping to toggle outline
+            vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
+                { desc = "Toggle Outline" })
+
+            require("outline").setup {
+                -- Your setup opts here (leave empty to use defaults)
+            }
+        end,
+    },
+    {
+  'nacro90/numb.nvim',
+  config = function()
+    require('numb').setup()
+  end,
+}
 }

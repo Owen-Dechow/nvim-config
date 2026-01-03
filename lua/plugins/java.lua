@@ -10,7 +10,6 @@ end
 return {
     {
         "mfussenegger/nvim-jdtls",
-        event = "VeryLazy",
         config = function()
             local config = {
                 cmd = {

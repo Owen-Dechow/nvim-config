@@ -1,6 +1,5 @@
 return {
     'filipdutescu/renamer.nvim',
-    event = "VeryLazy",
     dependencies = {
         'nvim-lua/plenary.nvim'
     },
@@ -8,6 +7,6 @@ return {
         require("renamer").setup({
             min_width = 20,
         })
-        vim.keymap.set('n', '<leader>rr', require("renamer").rename)
+        vim.keymap.set('n', '<leader>rr', require("renamer").rename, { desc = "Rename" })
     end
 }

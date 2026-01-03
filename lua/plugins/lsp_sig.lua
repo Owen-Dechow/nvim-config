@@ -1,6 +1,5 @@
 return {
     "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
     opts = {
         hint_enable = false,
         max_width = function()

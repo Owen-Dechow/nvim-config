@@ -1,6 +1,6 @@
 require("config.lazy")
 require("config.opts")
-require("config.menu")
 require("config.remap")
 require("config.cmds")
 require("config.custom_langs")
+require("config.fold")

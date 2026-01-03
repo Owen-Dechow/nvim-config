@@ -1,7 +1,8 @@
----@diagnostic disable: undefined-global
-
 -- Block Cursor
-vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250"
+vim.opt.guicursor = {
+    "n-v-c:block-blinkon1-blinkoff1",
+    "i-ci:ver25-blinkon1-blinkoff1",
+}
 
 -- Numbers
 vim.o.nu = true
@@ -26,9 +27,8 @@ vim.o.writebackup = false
 vim.o.undodir = vim.env.HOME .. "/.vim/undodir"
 vim.o.undofile = true
 
-vim.opt.fillchars = { eob = " " }
 vim.diagnostic.enable()
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({ signs = false, virtual_text = true })
 
 vim.wo.wrap = false
 
