@@ -8,7 +8,7 @@ return {
                 colors = {
                     bg = color.darken("bg", 10),
                     cursorline = color.darken("bg", 5),
-                    selection = color.lighten("bg", 1),
+                    selection = "#203040",
                     darkorange = color.darken("orange", 50),
                 },
                 highlights = {
