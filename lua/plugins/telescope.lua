@@ -9,6 +9,7 @@ end
 
 local file_ignore_patterns = {
     "bin/",
+    "build/",
     "obj/",
     "%.class",
     "%.meta",
