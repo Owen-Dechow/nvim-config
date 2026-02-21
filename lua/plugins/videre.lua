@@ -6,6 +6,6 @@ return {
         "Owen-Dechow/graph_view_toml_parser",
     },
     opts = {
-        round_units = false,
+        round_units = true,
     }
 }

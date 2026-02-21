@@ -27,7 +27,6 @@ return {
                 "jdtls",
                 "emmet-language-server",
                 "ruff",
-                "omnisharp",
                 "css-lsp",
                 "djlint",
             }
@@ -60,12 +59,6 @@ return {
                         },
                     },
                 },
-            })
-
-            vim.lsp.config("omnisharp", {
-                enable_import_completion = true,
-                organize_imports_on_format = true,
-                enable_roslyn_analyzers = true,
             })
 
             require("mason-lspconfig").setup({

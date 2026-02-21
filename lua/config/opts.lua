@@ -28,7 +28,11 @@ vim.o.undodir = vim.env.HOME .. "/.vim/undodir"
 vim.o.undofile = true
 
 vim.diagnostic.enable()
-vim.diagnostic.config({ signs = false, virtual_text = true })
+vim.diagnostic.config({
+    signs = false,
+    virtual_text = true,
+    severity_sort = true,
+})
 
 vim.wo.wrap = false
 
