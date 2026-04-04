@@ -1,72 +1,51 @@
-return {
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
-        config = function()
-            require("telescope").setup {
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown {}
-                    }
-                }
-            }
-            require("telescope").load_extension("ui-select")
+vim.pack.add({
+    "https://github.com/nvim-telescope/telescope-ui-select.nvim",
+    "https://github.com/rcarriga/nvim-notify",
+    'https://github.com/nvim-lualine/lualine.nvim',
+    "https://github.com/lewis6991/gitsigns.nvim",
+    "https://github.com/hedyhli/outline.nvim",
+    'https://github.com/nacro90/numb.nvim',
+})
 
-            vim.api.nvim_create_autocmd("BufWinEnter", {
-                pattern = "quickfix",
-                callback = function()
-                    vim.schedule(function()
-                        vim.cmd("cclose")
-                        require('telescope.builtin').quickfix()
-                    end)
-                end,
-            })
-        end
-    },
-    {
-        "rcarriga/nvim-notify",
-        dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
-        config = function()
-            ---@param msg string
-            ---@param level string | nil
-            vim.notify = function(msg, level)
-                require("notify").setup({
-                    stages = "static",
-                    top_down = false,
-                    render = "wrapped-compact",
-                })
-                vim.notify = require("notify")
-                vim.notify(msg, level)
-            end
-        end
-    },
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        config = function()
-            require("lualine").setup({
-                options = {
-                    globalstatus = true,
-                }
-            })
-        end
-    },
-    { "lewis6991/gitsigns.nvim" },
-    {
-        "hedyhli/outline.nvim",
-        config = function()
-            -- Example mapping to toggle outline
-            vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
-                { desc = "Toggle Outline" })
-
-            require("outline").setup {
-                -- Your setup opts here (leave empty to use defaults)
-            }
-        end,
-    },
-    {
-        'nacro90/numb.nvim',
-        config = function()
-            require('numb').setup()
-        end,
+require("telescope").setup {
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown {}
+        }
     }
 }
+require("telescope").load_extension("ui-select")
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = "quickfix",
+    callback = function()
+        vim.schedule(function()
+            vim.cmd("cclose")
+            require('telescope.builtin').quickfix()
+        end)
+    end,
+})
+
+vim.notify = function(msg, level)
+    require("notify").setup({
+        stages = "static",
+        top_down = false,
+        render = "wrapped-compact",
+    })
+    vim.notify = require("notify")
+    vim.notify(msg, level)
+end
+
+require("lualine").setup({
+    options = {
+        globalstatus = true,
+    }
+})
+
+vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
+    { desc = "Toggle Outline" })
+
+require("outline").setup {
+}
+
+require('numb').setup()

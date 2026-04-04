@@ -1,9 +1,7 @@
-return {
-    "mbbill/undotree",
-    config = function()
-        vim.g.undotree_DiffCommand = "git diff"
-        vim.g.undotree_WindowLayout = 3
+vim.pack.add({
+    "https://github.com/mbbill/undotree",
+})
 
-        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = "Toggle Undotree"})
-    end
-}
+vim.g.undotree_DiffCommand = "git diff"
+vim.g.undotree_WindowLayout = 3
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })

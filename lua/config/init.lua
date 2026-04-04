@@ -1,0 +1,4 @@
+require("config.opts")
+require("config.remap")
+require("config.cmds")
+require("config.custom_langs")

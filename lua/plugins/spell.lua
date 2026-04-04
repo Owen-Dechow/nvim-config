@@ -1,6 +1,7 @@
-return {
-    "Owen-Dechow/nvim_wurd_spel",
-    opts = {
-        remap_special = true,
-    }
-}
+vim.pack.add({
+    "https://github.com/Owen-Dechow/nvim_wurd_spel",
+})
+
+require("wurd_spel").setup({
+    remap_special = true,
+})
