@@ -34,6 +34,7 @@ local ensure_installed = {
     "ruff",
     "css-lsp",
     "djlint",
+    "json-lsp",
 }
 
 for _, pkg_name in ipairs(ensure_installed) do
