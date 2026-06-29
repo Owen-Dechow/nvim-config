@@ -6,6 +6,7 @@ vim.pack.add({
     'https://github.com/mrcjkb/rustaceanvim',
     "https://github.com/jay-babu/mason-null-ls.nvim",
     "https://github.com/nvimtools/none-ls.nvim",
+    "https://github.com/folke/lazydev.nvim",
 })
 
 require("mason").setup({
@@ -35,6 +36,7 @@ local ensure_installed = {
     "css-lsp",
     "djlint",
     "json-lsp",
+    "cobol-language-support"
 }
 
 for _, pkg_name in ipairs(ensure_installed) do
@@ -73,6 +75,13 @@ require("typescript-tools").setup({
             semicolons = 'insert'
         }
     }
+})
+
+require("lazydev").setup({
+    library = {
+        -- Enable types for vim.uv / luvit
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+    },
 })
 
 vim.g.rustaceanvim = {

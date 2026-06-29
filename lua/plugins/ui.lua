@@ -26,15 +26,14 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end,
 })
 
-vim.notify = function(msg, level)
-    require("notify").setup({
-        stages = "static",
-        top_down = false,
-        render = "wrapped-compact",
-    })
-    vim.notify = require("notify")
-    vim.notify(msg, level)
-end
+require("notify").setup({
+    stages = "static",
+    top_down = false,
+    render = "wrapped-compact",
+})
+
+vim.notify = require("notify")
+
 
 require("lualine").setup({
     options = {

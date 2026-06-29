@@ -5,6 +5,8 @@ vim.pack.add({
     "https://github.com/Owen-Dechow/graph_view_toml_parser",
 })
 
-require("videre").setup({
-    round_units = true,
-})
+-- vim.opt.runtimepath:prepend(vim.fn.expand("~/Projects/videre.nvim"))
+-- 
+-- require("videre").setup({
+--     expand_newlines = true
+-- })

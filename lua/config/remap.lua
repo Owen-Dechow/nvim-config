@@ -25,10 +25,11 @@ vim.keymap.set("n", "<leader>ch", "<CMD>noh<CR>", { desc = "Clear search highlig
 -- Save/Close
 vim.keymap.set("n", "<leader>bd", "<CMD>bd<CR>", { desc = "Delete buffer" })
 
+
 -- LSP
+vim.keymap.set({ "n", "v" }, "<leader>rr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>fb", vim.lsp.buf.format, { desc = "Format buffer" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Goto definition" })
-vim.keymap.set("n", "<leader>nd", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { desc = "Hover" })
-vim.keymap.set("n", "<leader>H", vim.diagnostic.open_float, { desc = "Diagnostic float" })
+vim.keymap.set("n", "<leader>nd", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "<leader>sd", vim.diagnostic.open_float, { desc = "Show diagnostic" })

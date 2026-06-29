@@ -3,12 +3,14 @@ vim.pack.add({
 })
 
 local color = require("onedarkpro.helpers")
+
 require("onedarkpro").setup({
     colors = {
         bg = color.darken("bg", 10),
         cursorline = color.darken("bg", 5),
         selection = "#203040",
         darkorange = color.darken("orange", 50),
+        colorline = color.darken("bg", 12),
     },
     highlights = {
         ["@lsp.type.struct"] = { fg = "${green}" },
@@ -20,7 +22,8 @@ require("onedarkpro").setup({
         CurSearch = { bg = "${cyan}", fg = "${black}", },
         IncSearch = { bg = "${cyan}", fg = "${black}", },
         MatchParen = { bg = "${selection}", fg = "${cyan}" },
-        Folded = { fg = "${orange}", bg = "${darkorange}" }
+        Folded = { fg = "${orange}", bg = "${darkorange}" },
+        ColorColumn = {bg = "${colorline}"},
     },
     options = {
         cursorline = true,
@@ -29,7 +32,9 @@ require("onedarkpro").setup({
 
 vim.cmd [[colorscheme onedark]]
 
-local a = {
-    'brenoprata10/nvim-highlight-colors',
-    config = true,
-}
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "cobol",
+    callback = function()
+        vim.opt_local.colorcolumn = "7,12,73,80"
+    end,
+})
