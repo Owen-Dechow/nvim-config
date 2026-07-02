@@ -99,6 +99,7 @@ vim.g.rustaceanvim = {
 local null_ls = require("null-ls")
 
 null_ls.setup({
+    default_timeout = 5000,
     sources = {
         null_ls.builtins.formatting.djlint.with({
             extra_args = { "--profile=django",
