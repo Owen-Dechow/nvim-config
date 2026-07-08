@@ -17,6 +17,18 @@ require("neo-tree").setup({
             end
         },
 
+    },
+    close_if_last_window = true,
+    filesystem = {
+        filtered_items = {
+            always_show_by_pattern = {
+                ".gitignore",
+                ".env",
+                ".env.*",
+                "*.env",
+                ".python-version",
+            }
+        }
     }
 })
 
