@@ -13,6 +13,7 @@ require("plugins.spell")
 require("plugins.scrolleof")
 require("plugins.java")
 require("plugins.roslyn")
+require("plugins.grug")
 
 vim.api.nvim_create_user_command("PackUpdate", function()
     vim.pack.update()
