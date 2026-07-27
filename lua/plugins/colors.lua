@@ -23,7 +23,7 @@ require("onedarkpro").setup({
         IncSearch = { bg = "${cyan}", fg = "${black}", },
         MatchParen = { bg = "${selection}", fg = "${cyan}" },
         Folded = { fg = "${orange}", bg = "${darkorange}" },
-        ColorColumn = {bg = "${colorline}"},
+        ColorColumn = { bg = "${colorline}" },
     },
     options = {
         cursorline = true,
@@ -31,6 +31,8 @@ require("onedarkpro").setup({
 })
 
 vim.cmd [[colorscheme onedark]]
+
+vim.opt.colorcolumn = "90"
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "cobol",
