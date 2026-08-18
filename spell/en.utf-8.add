@@ -86,3 +86,12 @@ filesystem
 Tertullian
 readonly
 filereadable
+struct
+backend
+immediates
+frontend
+libcall
+stdint
+deref
+libcalls
+nargs
